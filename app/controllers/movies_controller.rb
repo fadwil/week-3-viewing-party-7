@@ -8,4 +8,8 @@ class MoviesController < ApplicationController
       @user = User.find(params[:user_id])
       @movie = Movie.find(params[:id])
   end 
+
+  def dummy_show
+    
+  end
 end 
