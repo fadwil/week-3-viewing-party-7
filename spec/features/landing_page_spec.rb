@@ -60,7 +60,7 @@ RSpec.describe 'Landing Page' do
 
       click_on "Log In"
 
-      expect(current_path).to eq(user_path(user.id))
+      expect(current_path).to eq("/dashboard")
     end
 
     it 'cannot log in with invalid credentials' do
@@ -121,14 +121,22 @@ RSpec.describe 'Landing Page' do
       expect(page).to have_link('Log Out')
       expect(page).to_not have_link('Log In')
 
-      
       click_link 'Log Out'
       
       expect(current_path).to eq(root_path)
       
       expect(page).to have_link('Log In')
       expect(page).to_not have_link('Log Out')
+    end
+  end
 
+  describe "dashboard" do
+    it "returns message to be logged in or registered to access dashboard" do
+      visit '/dashboard'
+
+      expect(current_path).to eq(root_path)
+
+      expect(page).to have_content("You must be logged in or registered to access your dashboard.")
     end
   end
 end

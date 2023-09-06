@@ -20,7 +20,7 @@ RSpec.describe 'Movies Index Page' do
   
     click_on "Log In"
   
-    expect(current_path).to eq(user_path(@user1.id))
+    expect(current_path).to eq("/dashboard")
 
     click_button "Find Top Rated Movies"
 
