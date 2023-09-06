@@ -94,4 +94,30 @@ RSpec.describe 'Landing Page' do
       expect(page).to have_content("Sorry, your credentials are bad.")
     end
   end
+
+  describe "logging out" do
+    it "logged-in user logs out" do
+      user = User.create!(name: 'Test User', email: 'test@example.com', password: 'password', password_confirmation: 'password')
+      visit login_path
+      fill_in 'Email', with: 'test@example.com'
+      fill_in 'Password', with: 'password'
+      click_button 'Log In'
+      
+      expect(page).to have_content("Welcome, Test User!")
+      
+      visit '/'
+      
+      expect(page).to have_link('Log Out')
+      expect(page).to_not have_link('Log In')
+
+      
+      click_link 'Log Out'
+      
+      expect(current_path).to eq(root_path)
+      
+      expect(page).to have_link('Log In')
+      expect(page).to_not have_link('Log Out')
+
+    end
+  end
 end
