@@ -1,5 +1,9 @@
 class WelcomeController < ApplicationController 
   def index 
-    @users = User.all
+    if current_user
+      @users = User.all
+    else
+      @users = []
+    end
   end 
 end 
